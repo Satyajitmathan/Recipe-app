@@ -1,25 +1,55 @@
-import { NavLink } from "react-router-dom"
+import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
+  const navLinks = [
+    { name: "Home", path: "/" },
+    { name: "Recipes", path: "/recipe" },
+    { name: "Favorites ❤️", path: "/fav" },
+    { name: "About", path: "/about" },
+  ];
+
   return (
-    <div className="flex items-center justify-center text-md gap-10 mb-10">
-        
-        <NavLink className={(e)=>e.isActive ?"text-blue-300":""} to="/">Home</NavLink>
+    <div className="flex items-center justify-between mb-10 py-4 border-b border-gray-700">
 
-        <NavLink className={(e)=>e.isActive ?"text-blue-300":""} to="/recipe">Recipes</NavLink>
+      {/* Logo */}
+      <h1 className="text-2xl font-bold">
+        🍽️ RecipeHub
+      </h1>
 
-        <NavLink className={(e)=>e.isActive ?"text-blue-300":""} to="/about">About</NavLink>    
+      {/* Links */}
+      <div className="flex items-center gap-6">
+        {navLinks.map((link) => (
+          <NavLink
+            key={link.path}
+            to={link.path}
+            className={({ isActive }) =>
+              `transition duration-200 hover:text-blue-400 ${
+                isActive
+                  ? "text-blue-400 font-medium"
+                  : "text-gray-300"
+              }`
+            }
+          >
+            {link.name}
+          </NavLink>
+        ))}
 
-        <NavLink className={(e)=> `px-4 py-2 rounded-md  bg-gray-900 ${ e.isActive ? "text-blue-300 " : ""}`}
-        to="/create-recipe">Create Recipe</NavLink>
-        
-        <NavLink className={(e)=>e.isActive ?"text-blue-300":""} to="/fav">Favorites❤️</NavLink>
-
-
-        
-
+        {/* CTA Button */}
+        <NavLink
+          to="/create-recipe"
+          className={({ isActive }) =>
+            `px-4 py-2 rounded-lg transition duration-200 ${
+              isActive
+                ? "bg-blue-700"
+                : "bg-blue-600 hover:bg-blue-700"
+            }`
+          }
+        >
+          + Create Recipe
+        </NavLink>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;

@@ -58,144 +58,196 @@ const RecipeDetail = () => {
     
   return (
     recipe ? (
-      <div className="w-full flex gap-10">
-        <div className="left w-1/2 p-2 ">
-           <div className="flex items-center justify-between px-2 pb-3 mt-2">
-                <h1 className="font-black text-2xl">
-                    {recipe.title}
-                </h1>
-                <button
-                    type="button"
-                    onClick={favHandler}
-                    className="text-3xl"
-                >
-                    {recipe.isFav ? (
-                    <FaHeart className="text-red-500" />
-                    ) : (
-                    <FaRegHeart />
-                    )}
-                </button>
-            </div>
-            <img className="object-cover px-2 pb-3 h-60 w-60" src={recipe.image} alt="" />
-            <p className="px-2 pb-3 text-xl">
-                <span className="font-medium text-red-400">Chef: </span>
-                {recipe.chef}
-            </p>
-            <p className="px-2 pb-3 text-xl">
-                {recipe.description}
-            </p>
-            <p className="px-2 text-xl"><span className="font-medium text-red-400">Ingredients: </span> 
-                {recipe.ingredients}
-            </p>
-            <p className="px-2 text-xl"><span className="font-medium text-red-400">Instructions: </span>
-                {recipe.instructions}
-            </p>
+      <div className="w-full flex gap-10 items-start">
+        
+        <div className="left flex-1">
+
+          <div className="flex items-center justify-between mb-5">
+            <h1 className="font-black text-4xl">
+              {recipe.title}
+            </h1>
+
+            <button
+              type="button"
+              onClick={favHandler}
+              className="text-3xl hover:scale-125 transition"
+            >
+              {recipe.isFav ? (
+                <FaHeart className="text-red-500" />
+              ) : (
+                <FaRegHeart />
+              )}
+            </button>
+          </div>
+
+          <img
+            className="w-full h-[350px] object-cover rounded-2xl"
+            src={recipe.image}
+            alt=""
+          />
+
+          <div className="mt-4">
+            <span className="bg-orange-500 px-4 py-2 rounded-full text-sm">
+              {recipe.category}
+            </span>
+          </div>
+
+          <p className="text-gray-400 mt-4 text-lg">
+            👨‍🍳 Chef: {recipe.chef}
+          </p>
+
+          <div className="bg-gray-900 p-5 rounded-2xl mt-6">
+            <h2 className="font-bold text-xl mb-3">
+              Description
+            </h2>
+
+            <p>{recipe.description}</p>
+          </div>
+
+          <div className="bg-gray-900 p-5 rounded-2xl mt-6">
+            <h2 className="font-bold text-xl mb-3">
+              Ingredients
+            </h2>
+
+            <p>{recipe.ingredients}</p>
+          </div>
+
+          <div className="bg-gray-900 p-5 rounded-2xl mt-6">
+            <h2 className="font-bold text-xl mb-3">
+              Instructions
+            </h2>
+
+            <p>{recipe.instructions}</p>
+          </div>
+
         </div>
-        <form className="right w-1/3 p-2 text-lg"
-            onSubmit={handleSubmit(updateHandler)} >
-            <input
-            className='w-full block p-2 border-b outline-0'
+
+        <form
+          className="right w-[40%] bg-gray-900 border border-gray-700 rounded-2xl p-6 h-fit"
+          onSubmit={handleSubmit(updateHandler)}
+        >
+          <h2 className="text-2xl font-bold mb-6">
+            Edit Recipe ✏️
+          </h2>
+
+          <input
+            className="w-full p-3 mb-3 rounded-xl bg-gray-800 border border-gray-700 outline-none focus:border-blue-500"
             {...register("image", {
               required: "Image URL is required"
             })}
             type="url"
-            placeholder='Enter image url'
+            placeholder="Enter image url"
           />
 
           {errors.image && (
-            <small className='text-red-500'>
+            <small className="text-red-500 block mb-2">
               {errors.image.message}
             </small>
           )}
-            <input 
-            className='w-full block p-2 border-b outline-0'
+
+          <input
+            className="w-full p-3 mb-3 rounded-xl bg-gray-800 border border-gray-700 outline-none focus:border-blue-500"
             {...register("title", {
               required: "Title is required"
             })}
-            type="text" 
-            placeholder='Recipe Title' 
-            />
-            {errors.title && (
-            <small className='text-red-500'>
+            type="text"
+            placeholder="Recipe Title"
+          />
+
+          {errors.title && (
+            <small className="text-red-500 block mb-2">
               {errors.title.message}
             </small>
           )}
-            <input 
-            className='w-full block p-2 border-b outline-0'
+
+          <input
+            className="w-full p-3 mb-3 rounded-xl bg-gray-800 border border-gray-700 outline-none focus:border-blue-500"
             {...register("chef", {
               required: "Chef name is required"
             })}
-            type="text" 
-            placeholder='Chef Name' 
-            />
-            {errors.chef && (
-            <small className='text-red-500'>
+            type="text"
+            placeholder="Chef Name"
+          />
+
+          {errors.chef && (
+            <small className="text-red-500 block mb-2">
               {errors.chef.message}
             </small>
           )}
-            <textarea
-            className='w-full block p-2 border-b outline-0'
+
+          <textarea
+            rows={4}
+            className="w-full p-3 mb-3 rounded-xl bg-gray-800 border border-gray-700 outline-none resize-none focus:border-blue-500"
             {...register("description", {
               required: "Description is required"
-            })} 
-            placeholder='Recipe Description' 
-            ></textarea>
-            {errors.description && (
-            <small className='text-red-500'>
+            })}
+            placeholder="Recipe Description"
+          />
+
+          {errors.description && (
+            <small className="text-red-500 block mb-2">
               {errors.description.message}
             </small>
           )}
 
-            <textarea
-            className='w-full block p-2 border-b outline-0'
+          <textarea
+            rows={4}
+            className="w-full p-3 mb-3 rounded-xl bg-gray-800 border border-gray-700 outline-none resize-none focus:border-blue-500"
             {...register("ingredients", {
               required: "Ingredients are required"
-            })} 
-            placeholder='Write Ingredients separated by comma' 
-            ></textarea>
-            {errors.ingredients && (
-            <small className='text-red-500'>
+            })}
+            placeholder="Write Ingredients separated by comma"
+          />
+
+          {errors.ingredients && (
+            <small className="text-red-500 block mb-2">
               {errors.ingredients.message}
             </small>
           )}
 
-            <textarea
-            className='w-full block p-2 border-b outline-0'
+          <textarea
+            rows={5}
+            className="w-full p-3 mb-3 rounded-xl bg-gray-800 border border-gray-700 outline-none resize-none focus:border-blue-500"
             {...register("instructions", {
               required: "Instructions are required"
-            })} 
-            placeholder='Write Instructions' 
-            ></textarea>
-            {errors.instructions && (
-            <small className='text-red-500'>
+            })}
+            placeholder="Write Instructions"
+          />
+
+          {errors.instructions && (
+            <small className="text-red-500 block mb-2">
               {errors.instructions.message}
             </small>
           )}
-          
-            <select
-            className='w-full block p-2 border-b outline-0 '
-            {...register("category")} 
-            >
-                <option className='text-black' value="breakfast">Breakfast</option>
-                <option className='text-black'
-                value="lunch">Lunch</option>
-                <option className='text-black'
-                value="supper">Supper</option>
-                <option className='text-black' 
-                value="dinner">Dinner</option>
-            </select>
-            <button 
-                type="submit"
-                className='block bg-blue-900 px-4 py-2 rounded mt-4'>
-                Update Recipe
-            </button>
+
+          <select
+            className="w-full p-3 mb-3 rounded-xl bg-gray-800 border border-gray-700 outline-none focus:border-blue-500"
+            {...register("category")}
+          >
+            <option value="breakfast">Breakfast</option>
+            <option value="lunch">Lunch</option>
+            <option value="supper">Supper</option>
+            <option value="dinner">Dinner</option>
+          </select>
+
+          <div className="flex gap-3 mt-5">
             <button
-                type="button"
-                onClick={deleteHandler}
-                className='block bg-red-900 px-4 py-2 rounded mt-4'>
-                Delete Recipe
+              type="submit"
+              className="flex-1 bg-blue-600 hover:bg-blue-700 transition-all duration-200 py-3 rounded-xl font-medium"
+            >
+              Update
             </button>
+
+            <button
+              type="button"
+              onClick={deleteHandler}
+              className="flex-1 bg-red-600 hover:bg-red-700 transition-all duration-200 py-3 rounded-xl font-medium"
+            >
+              Delete
+            </button>
+          </div>
         </form>
+
       </div>
     ) : (
       <p className="px-2">Recipe not found.</p>
