@@ -57,96 +57,128 @@ const RecipeDetail = () => {
     }
     
   return (
-    recipe ? (
-      <div className="w-full flex gap-10 items-start">
-        
-        <div className="left flex-1">
+    recipe ? ( <div className="grid lg:grid-cols-[1.3fr_0.9fr] gap-10">
 
-          <div className="flex items-center justify-between mb-5">
-            <h1 className="font-black text-4xl">
-              {recipe.title}
-            </h1>
 
-            <button
-              type="button"
-              onClick={favHandler}
-              className="text-3xl hover:scale-125 transition"
-            >
-              {recipe.isFav ? (
-                <FaHeart className="text-red-500" />
-              ) : (
-                <FaRegHeart />
-              )}
-            </button>
-          </div>
+     {/* LEFT SIDE */}
+      <div>
 
-          <img
-            className="w-full h-[350px] object-cover rounded-2xl"
-            src={recipe.image}
-            alt=""
-          />
+        <div className="flex items-center justify-between mb-5">
 
-          <div className="mt-4">
-            <span className="bg-orange-500 px-4 py-2 rounded-full text-sm">
-              {recipe.category}
-            </span>
-          </div>
+          <h1 className="text-4xl font-black text-white tracking-tight">
+            {recipe.title}
+          </h1>
 
-          <p className="text-gray-400 mt-4 text-lg">
-            👨‍🍳 Chef: {recipe.chef}
-          </p>
+          <button
+            type="button"
+            onClick={favHandler}
+            className="text-3xl hover:scale-125 transition-all duration-300"
+          >
+            {recipe.isFav ? (
+              <FaHeart className="text-red-500" />
+            ) : (
+              <FaRegHeart className="text-slate-300" />
+            )}
+          </button>
 
-          <div className="bg-gray-900 p-5 rounded-2xl mt-6">
-            <h2 className="font-bold text-xl mb-3">
+        </div>
+
+        <img
+          className="
+                w-full
+                h-[220px]
+                sm:h-[280px]
+                md:h-[350px]
+                lg:h-[400px]
+                object-cover
+                rounded-3xl
+                border border-white/10
+          "
+          src={recipe.image}
+          alt=""
+        />
+
+        <div className="flex items-center gap-4 mt-4 flex-wrap">
+
+          <span className="px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-300">
+            {recipe.category}
+          </span>
+
+          <span className="text-slate-300">
+            👨‍🍳 {recipe.chef}
+          </span>
+
+        </div>
+
+        <div className="mt-5 space-y-4">
+
+          {/* Description */}
+          <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-4">
+
+            <h2 className="text-xl font-bold mb-2 text-cyan-300">
               Description
             </h2>
 
-            <p>{recipe.description}</p>
+            <p className="text-slate-300 leading-relaxed">
+              {recipe.description}
+            </p>
+
           </div>
 
-          <div className="bg-gray-900 p-5 rounded-2xl mt-6">
-            <h2 className="font-bold text-xl mb-3">
+          {/* Ingredients */}
+          <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-4">
+
+            <h2 className="text-xl font-bold mb-2 text-cyan-300">
               Ingredients
             </h2>
 
-            <p>{recipe.ingredients}</p>
+            <p className="text-slate-300 leading-relaxed whitespace-pre-wrap">
+              {recipe.ingredients}
+            </p>
+
           </div>
 
-          <div className="bg-gray-900 p-5 rounded-2xl mt-6">
-            <h2 className="font-bold text-xl mb-3">
+          {/* Instructions */}
+          <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-4">
+
+            <h2 className="text-xl font-bold mb-2 text-cyan-300">
               Instructions
             </h2>
 
-            <p>{recipe.instructions}</p>
+            <p className="text-slate-300 leading-relaxed whitespace-pre-wrap">
+              {recipe.instructions}
+            </p>
+
           </div>
 
         </div>
 
-        <form
-          className="right w-[40%] bg-gray-900 border border-gray-700 rounded-2xl p-6 h-fit"
-          onSubmit={handleSubmit(updateHandler)}
-        >
-          <h2 className="text-2xl font-bold mb-6">
-            Edit Recipe ✏️
-          </h2>
+      </div>
+
+      {/* RIGHT SIDE FORM */}
+      <form
+        onSubmit={handleSubmit(updateHandler)}
+        className="
+          h-fit
+          sticky
+          top-28
+          bg-white/5
+          backdrop-blur-xl
+          border
+          border-white/10
+          rounded-3xl
+          p-6
+        "
+      >
+
+        <h2 className="text-3xl font-bold mb-5 text-cyan-100">
+          Edit Recipe ✏️
+        </h2>
+
+        <div className="space-y-3">
 
           <input
-            className="w-full p-3 mb-3 rounded-xl bg-gray-800 border border-gray-700 outline-none focus:border-blue-500"
-            {...register("image", {
-              required: "Image URL is required"
-            })}
-            type="url"
-            placeholder="Enter image url"
-          />
-
-          {errors.image && (
-            <small className="text-red-500 block mb-2">
-              {errors.image.message}
-            </small>
-          )}
-
-          <input
-            className="w-full p-3 mb-3 rounded-xl bg-gray-800 border border-gray-700 outline-none focus:border-blue-500"
+            className="w-full p-3 rounded-xl bg-slate-900/60 border border-slate-700 outline-none focus:border-cyan-500"
             {...register("title", {
               required: "Title is required"
             })}
@@ -155,85 +187,89 @@ const RecipeDetail = () => {
           />
 
           {errors.title && (
-            <small className="text-red-500 block mb-2">
+            <small className="text-red-500 block">
               {errors.title.message}
             </small>
           )}
 
+          <div className="grid grid-cols-2 gap-3">
+
+            <input
+              className="w-full p-3 rounded-xl bg-slate-900/60 border border-slate-700 outline-none focus:border-cyan-500"
+              {...register("chef", {
+                required: "Chef name is required"
+              })}
+              type="text"
+              placeholder="Chef Name"
+            />
+
+            <select
+              className="w-full p-3 rounded-xl bg-slate-900/60 border border-slate-700 outline-none focus:border-cyan-500"
+              {...register("category")}
+            >
+              <option value="breakfast">Breakfast</option>
+              <option value="lunch">Lunch</option>
+              <option value="supper">Supper</option>
+              <option value="dinner">Dinner</option>
+            </select>
+
+          </div>
+
           <input
-            className="w-full p-3 mb-3 rounded-xl bg-gray-800 border border-gray-700 outline-none focus:border-blue-500"
-            {...register("chef", {
-              required: "Chef name is required"
+            className="w-full p-3 rounded-xl bg-slate-900/60 border border-slate-700 outline-none focus:border-cyan-500"
+            {...register("image", {
+              required: "Image URL is required"
             })}
-            type="text"
-            placeholder="Chef Name"
+            type="url"
+            placeholder="Image URL"
           />
 
-          {errors.chef && (
-            <small className="text-red-500 block mb-2">
-              {errors.chef.message}
+          {errors.image && (
+            <small className="text-red-500 block">
+              {errors.image.message}
             </small>
           )}
 
           <textarea
-            rows={4}
-            className="w-full p-3 mb-3 rounded-xl bg-gray-800 border border-gray-700 outline-none resize-none focus:border-blue-500"
+            rows={3}
+            className="w-full p-3 rounded-xl bg-slate-900/60 border border-slate-700 outline-none resize-none focus:border-cyan-500"
             {...register("description", {
               required: "Description is required"
             })}
-            placeholder="Recipe Description"
+            placeholder="Description"
           />
 
-          {errors.description && (
-            <small className="text-red-500 block mb-2">
-              {errors.description.message}
-            </small>
-          )}
-
           <textarea
-            rows={4}
-            className="w-full p-3 mb-3 rounded-xl bg-gray-800 border border-gray-700 outline-none resize-none focus:border-blue-500"
+            rows={3}
+            className="w-full p-3 rounded-xl bg-slate-900/60 border border-slate-700 outline-none resize-none focus:border-cyan-500"
             {...register("ingredients", {
               required: "Ingredients are required"
             })}
-            placeholder="Write Ingredients separated by comma"
+            placeholder="Ingredients"
           />
 
-          {errors.ingredients && (
-            <small className="text-red-500 block mb-2">
-              {errors.ingredients.message}
-            </small>
-          )}
-
           <textarea
-            rows={5}
-            className="w-full p-3 mb-3 rounded-xl bg-gray-800 border border-gray-700 outline-none resize-none focus:border-blue-500"
+            rows={4}
+            className="w-full p-3 rounded-xl bg-slate-900/60 border border-slate-700 outline-none resize-none focus:border-cyan-500"
             {...register("instructions", {
               required: "Instructions are required"
             })}
-            placeholder="Write Instructions"
+            placeholder="Instructions"
           />
 
-          {errors.instructions && (
-            <small className="text-red-500 block mb-2">
-              {errors.instructions.message}
-            </small>
-          )}
+          <div className="grid grid-cols-2 gap-3 pt-2">
 
-          <select
-            className="w-full p-3 mb-3 rounded-xl bg-gray-800 border border-gray-700 outline-none focus:border-blue-500"
-            {...register("category")}
-          >
-            <option value="breakfast">Breakfast</option>
-            <option value="lunch">Lunch</option>
-            <option value="supper">Supper</option>
-            <option value="dinner">Dinner</option>
-          </select>
-
-          <div className="flex gap-3 mt-5">
             <button
               type="submit"
-              className="flex-1 bg-blue-600 hover:bg-blue-700 transition-all duration-200 py-3 rounded-xl font-medium"
+              className="
+                py-3
+                rounded-xl
+                font-semibold
+                bg-blue-600
+                hover:bg-blue-700
+                transition-all
+                duration-300
+              "
             >
               Update
             </button>
@@ -241,18 +277,33 @@ const RecipeDetail = () => {
             <button
               type="button"
               onClick={deleteHandler}
-              className="flex-1 bg-red-600 hover:bg-red-700 transition-all duration-200 py-3 rounded-xl font-medium"
+              className="
+                py-3
+                rounded-xl
+                font-semibold
+                bg-red-600
+                hover:bg-red-700
+                transition-all
+                duration-300
+              "
             >
               Delete
             </button>
-          </div>
-        </form>
 
-      </div>
-    ) : (
-      <p className="px-2">Recipe not found.</p>
+          </div>
+
+        </div>
+
+      </form>
+
+    </div>
+
+
+    ) : ( <p className="text-center text-xl text-slate-400">
+    Recipe not found. </p>
     )
-  )
+);
+
 }
 
 export default RecipeDetail
