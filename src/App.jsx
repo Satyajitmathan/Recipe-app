@@ -10,12 +10,11 @@ return (
 
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-500/10 blur-3xl rounded-full pointer-events-none"></div>
 
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-violet-500/5 blur-3xl rounded-full pointer-events-none"></div>
 
-  <div className="relative px-[8%] py-8">
-    <Navbar />
-    <MainRoutes />
-  </div>
+    <div className="relative px-[8%] py-8">
+      <Navbar />
+      <MainRoutes />
+    </div>
 
 </div>
 

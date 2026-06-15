@@ -5,12 +5,17 @@ import { HashRouter } from "react-router-dom";
 import { ToastContainer } from 'react-toastify'
 import Recipe from './pages/Recipe.jsx'
 import RecipeContext from './context/RecipeContext.jsx'
+ 
 
 createRoot(document.getElementById('root')).render(
   <RecipeContext>
     <HashRouter>
         <App />
-        <ToastContainer position='top-center'/>
+        <ToastContainer
+          position="top-center"
+          autoClose={2000}
+          theme="dark"
+        />
     </HashRouter>  
   </RecipeContext>
 )

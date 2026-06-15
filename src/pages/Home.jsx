@@ -77,7 +77,7 @@ return ( <div className="relative min-h-screen overflow-hidden">
       />
 
       <div className="absolute top-5 left-5 bg-black/40 backdrop-blur-md px-4 py-2 rounded-xl border border-white/10">
-        ⭐ 100+ Recipes
+        ⭐ {data.length} Recipes
       </div>
 
     </div>
